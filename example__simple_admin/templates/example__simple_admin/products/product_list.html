@@ -1,0 +1,22 @@
+{% extends 'example__simple_admin/_base.html' %}
+
+{% block content %}
+    <div class="products-catagories-area clearfix">
+        <div class="amado-pro-catagory clearfix" style="position: relative; height: 1689.87px;">
+            {% for item in products %}
+                <!-- Single Catagory -->
+                <div class="single-products-catagory clearfix" style="position: absolute; left: 0%; top: 0px;">
+                    <a href="{% url 'example__simple_admin:product_update' item.slug %}">
+                        <img src="{{ item.main_image.url }}" alt="" width="">
+                        <!-- Hover Content -->
+                        <div class="hover-content">
+                            <div class="line"></div>
+                            <p>From ${{ item.price }}</p>
+                            <h4>{{ item.title }}</h4>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

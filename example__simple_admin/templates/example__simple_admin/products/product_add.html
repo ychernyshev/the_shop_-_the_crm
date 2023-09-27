@@ -1,0 +1,25 @@
+{% extends 'example__simple_admin/_base.html' %}
+
+{% block content %}
+    <div class="single-product-area section-padding-100 clearfix">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-xl-8 col-lg-8 col-sm-12 col-12">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <p>{{ form.title }}</p>
+                        <p>{{ form.description }}</p>
+                        <p>{{ form.price }}</p>
+                        <p class="d-flex flex-row">
+                            <span style="width: 5.5rem">In stock:</span>
+                            <span>{{ form.in_stock }}</span>
+                        </p>
+                        <p>{{ form.count }}</p>
+                        <p>{{ form.main_image }}</p>
+                        <button type="submit" class="btn amado-btn mt-4">Add new product</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

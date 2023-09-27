@@ -1,0 +1,135 @@
+{% load static %}
+{% url 'example__simple_shop:home' as home_page %}
+{% url 'example__simple_shop:shop' as shop_page %}
+{% url 'example__simple_shop:product' as product_page %}
+{% url 'example__simple_shop:cart' as cart_page %}
+{% url 'example__simple_shop:checkout' as checkout_page %}
+{% url 'example__simple_shop:login' as login_page %}
+{% url 'example__simple_shop:register' as register_page %}
+{% url 'example__simple_shop:user_page' as user_page %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Shop: {{ title }}{% block title %}{% endblock %}</title>
+
+    <!-- Favicon  -->
+    <link rel="icon" href="{% static 'example__simple_shop/img/core-img/favicon.ico' %}">
+
+    <!-- Core Style CSS -->
+    <link rel="stylesheet" href="{% static 'example__simple_shop/css/core-style.css' %}">
+    <link rel="stylesheet" href="{% static 'example__simple_shop/css/style.css' %}">
+
+    <style>
+        .additional-nav-link {
+            margin-top: -1rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Search Wrapper Area Start -->
+<div class="search-wrapper section-padding-100">
+    <div class="search-close">
+        <i class="fa fa-close" aria-hidden="true"></i>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="search-content">
+                    <form action="#" method="get">
+                        <input type="search" name="search" id="search" placeholder="Type your keyword...">
+                        <button type="submit"><img src="{% static 'example__simple_shop/img/core-img/search.png' %}"
+                                                   alt=""></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Search Wrapper Area End -->
+<!-- ##### Main Content Wrapper Start ##### -->
+<div class="main-content-wrapper d-flex clearfix">
+
+    <!-- Mobile Nav (max width 767px)-->
+    <div class="mobile-nav">
+        <!-- Navbar Brand -->
+        <div class="amado-navbar-brand">
+            <a href="index.html"><img src="{% static 'example__simple_shop/img/core-img/logo_admin.png' %}" alt=""></a>
+        </div>
+        <!-- Navbar Toggler -->
+        <div class="amado-navbar-toggler">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+
+    <!-- Header Area Start -->
+    <header class="header-area clearfix">
+        <!-- Close Icon -->
+        <div class="nav-close">
+            <i class="fa fa-close" aria-hidden="true"></i>
+        </div>
+        <!-- Logo -->
+        <div class="logo">
+            <a href="{% url 'example__simple_admin:dashboard' %}"><img src="{% static 'example__simple_shop/img/core-img/logo_admin.png' %}" alt=""></a>
+        </div>
+        <!-- Amado Nav -->
+        <nav class="amado-nav left-nav">
+            <ul>
+                <li><strong>Products</strong></li>
+                <li>
+                    <a class="" href="{% url 'example__simple_admin:product_list' %}">Product List</a>
+                </li>
+                <li style="">
+                    <a class="additional-nav-link" href="{% url 'example__simple_admin:product_add' %}">Add Product</a>
+                </li>
+                <li><strong>Orders</strong></li>
+                <li>
+                    <a class="nav-link" href="{% url 'example__simple_admin:order_list' %}">Order List</a>
+                </li>
+                <li><strong>Customers</strong></li>
+                <li><a class="nav-link" href="{% url 'example__simple_admin:customers_list' %}">Customers List</a></li>
+            </ul>
+            <ul>
+                <li class="nav-item nav-category mt-4"><strong>Help</strong></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://bootstrapdash.com/demo/star-admin2-free/docs/documentation.html">
+                        <i class="menu-icon mdi mdi-file-document"></i>
+                        <span class="menu-title">Documentation</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="row justify-content-center">
+            <a href="https://ychernyshev.vercel.app/" class="text-primary-dark mx-auto" target="_blank">ychernyshev.vercel.com</a>
+        </div>
+        <div class="social-info d-flex justify-content-between mt-3">
+            <a href="https://www.linkedin.com/in/ychernyshev/" target="_blank"><i class="fa fa-linkedin"
+                                                                                  aria-hidden="true"></i></a>
+            <a href="https://www.youtube.com/@165000klmn/videos" target="_blank"><i class="fa fa-youtube"
+                                                                                    aria-hidden="true"></i></a>
+            <a href="https://github.com/ychernyshev?tab=repositories" target="_blank"><i class="fa fa-git"
+                                                                                         aria-hidden="true"></i></a>
+        </div>
+    </header>
+    <!-- Header Area End -->
+    {% if messages %}
+        {% for message in messages %}
+            <div {% if message.tags %} class="alert  alert-{{ message.tags }}" {% endif %} role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% block content %}{% endblock %}
+</div>
+
+<script src="{% static 'example__simple_shop/js/jquery/jquery-2.2.4.min.js' %}"></script>
+<!-- Popper js -->
+<script src="{% static 'example__simple_shop/js/popper.min.js' %}"></script>
+<!-- Bootstrap js -->
+<script src="{% static 'example__simple_shop/js/bootstrap.min.js' %}"></script>
+<!-- Plugins js -->
+<script src="{% static 'example__simple_shop/js/plugins.js' %}"></script>
+<!-- Active js -->
+<script src="{% static 'example__simple_shop/js/active.js' %}"></script>
+</body>
+</html>
