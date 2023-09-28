@@ -78,14 +78,6 @@
         <h6 class="text-primary-darker mt-5">Hello, {% if request.user.is_authenticated %}
             <strong>{{ user.username }}</strong>
             {% endif %}</h6>
-        <nav class="amado-nav left-nav">
-            <ul>
-                <li><a href="{% url 'example__simple_shop:logout' %}">Logout</a></li>
-            </ul>
-        </nav>
-        <div class="amado-btn-group mt-30 mb-100">
-            <a href="#" class="btn button-warning text-light mb-15 p-3">Discount</a>
-        </div>
 
         <!-- Cart Menu -->
         <div class="cart-fav-search mb-100 text-secondary-color">
@@ -96,6 +88,11 @@
                                              alt=""> Favourite</a>
             <a href="#" class="search-nav"><img src="{% static 'example__simple_shop/img/core-img/search.png' %}"
                                                 alt=""> Search</a>
+            <nav class="amado-nav left-nav">
+                <ul>
+                    <li><a href="{% url 'example__simple_shop:logout' %}">Logout</a></li>
+                </ul>
+            </nav>
         </div>
         {% else %}
         <nav class="amado-nav left-nav mt-5 mb-5">
@@ -112,7 +109,7 @@
         </nav>
         {% endif %}
         <!-- Social Button -->
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mt-5">
             <a href="https://ychernyshev.vercel.app/" class="text-primary-dark mx-auto" target="_blank">ychernyshev.vercel.com</a>
         </div>
         <div class="social-info d-flex justify-content-between mt-3">
