@@ -38,16 +38,17 @@ def product_list(request):
 
 def product_add(request):
     if request.method == 'POST':
-        form = AddProductForm(request.POST)
+        form = AddProductForm(request.POST, request.FILES)
         if form.is_valid():
             title = form.cleaned_data['title']
-            if ProductModel.objects.filter(title=title).exist():
+            if ProductModel.objects.filter(title=title).exists():
                 messages.warning(request, f'Product "{title}" already exists on the Database')
             else:
                 ProductModel.objects.create(**form.cleaned_data)
                 if form:
                     messages.success(request, f'Product "{title}" created successfully')
-                    return HttpResponseRedirect(reverse('example__simple_admin:product_list'))
+                    return HttpResponseRedirect(reverse(
+                        'example__simple_admin:product_list'))
                 else:
                     messages.warning(request, 'Something went wrong. Please try again')
     else:
@@ -58,7 +59,8 @@ def product_add(request):
         'form': form,
     }
 
-    return render(request, 'example__simple_admin/products/product_add.html', context=context)
+    return render(request, 'example__simple_admin/products/product_add.html',
+                  context=context)
 
 
 def product_details(request, slug=None):
@@ -69,7 +71,8 @@ def product_details(request, slug=None):
         'product_details': product_details,
     }
 
-    return render(request, 'example__simple_admin/products/product_details.html', context=context)
+    return render(request, 'example__simple_admin/products/product_details.html',
+                  context=context)
 
 
 class ProductUpdateView(SuccessMessageMixin, UpdateView):

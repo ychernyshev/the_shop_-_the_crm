@@ -10,12 +10,6 @@ class AddProductForm(forms.Form):
                                     'class': 'form-control',
                                     'placeholder': 'Product title'
                                 }))
-    slug = forms.CharField(label='',
-                           widget=forms.TextInput(
-                               attrs={
-                                   'class': 'form-control',
-                                   'placeholder': 'Product title'
-                               }))
     description = forms.CharField(label='', widget=forms.Textarea(
         attrs={
             'class': 'form-control',
@@ -51,12 +45,6 @@ class AddProductModelForm(forms.ModelForm):
                                     'class': 'form-control',
                                     'placeholder': 'Product title'
                                 }))
-    slug = forms.CharField(label='',
-                           widget=forms.TextInput(
-                               attrs={
-                                   'class': 'form-control',
-                                   'placeholder': 'Product title'
-                               }))
     description = forms.CharField(label='', widget=forms.Textarea(
         attrs={
             'class': 'form-control',
@@ -82,7 +70,7 @@ class AddProductModelForm(forms.ModelForm):
                                        'class': 'form-control',
                                        'placeholder': 'Count in stock'
                                    }))
-    main_image = forms.ImageField(label='', widget=forms.FileInput(attrs={'class': 'form-control-file'}))
+    main_image = forms.ImageField(label='', widget=forms.FileInput(attrs={'class': 'form-control-file border-1'}))
 
     class Meta:
         model = ProductModel
