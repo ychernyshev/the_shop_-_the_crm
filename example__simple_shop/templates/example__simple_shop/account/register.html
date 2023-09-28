@@ -1,0 +1,22 @@
+{% extends 'example__simple_shop/_base.html' %}
+
+{% block content %}
+<div class="products-catagories-area clearfix">
+    <div class="amado-pro-catagory clearfix" style="position: relative; height: 1689.87px;">
+        <div class="d-flex align-items-center">
+            <div class="row justify-content-center">
+                <div class="col-xl-6 col-lg-8 col-sm-12 col-12 text-center">
+                    <form action="" method="post">
+                        <h5>If you have no account, <a href="{% url 'example__simple_shop:login' %}"
+                                                       class="text-secondary">login</a>.
+                        </h5>
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="amado-btn">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

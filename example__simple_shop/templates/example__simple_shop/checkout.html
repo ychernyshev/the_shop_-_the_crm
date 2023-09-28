@@ -1,5 +1,9 @@
 {% extends 'example__simple_shop/_base.html' %}
 
 {% block content %}
+    {% if request.user.is_authenticated %}
 
+    {% else %}
+        {% include 'example__simple_shop/inc/authorised.html' %}
+    {% endif %}
 {% endblock %}

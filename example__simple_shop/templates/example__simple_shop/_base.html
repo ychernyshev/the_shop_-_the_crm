@@ -1,6 +1,5 @@
 {% load static %}
-{% url 'example__simple_shop:home' as home_page %}
-{% url 'example__simple_shop:shop' as shop_page %}
+{% url 'example__simple_shop:shop' as home_page %}
 {% url 'example__simple_shop:product' as product_page %}
 {% url 'example__simple_shop:cart' as cart_page %}
 {% url 'example__simple_shop:checkout' as checkout_page %}
@@ -48,7 +47,8 @@
     <div class="mobile-nav">
         <!-- Navbar Brand -->
         <div class="amado-navbar-brand">
-            <a href="index.html"><img src="{% static 'example__simple_shop/img/core-img/logo.png' %}" alt=""></a>
+            <a href="{% url 'example__simple_shop:shop' %}"><img
+                    src="{% static 'example__simple_shop/img/core-img/logo.png' %}" alt=""></a>
         </div>
         <!-- Navbar Toggler -->
         <div class="amado-navbar-toggler">
@@ -70,56 +70,58 @@
         <nav class="amado-nav left-nav">
             <ul>
                 <li class="{% if request.path == home_page %}active{% endif %}"><a
-                        href="{% url 'example__simple_shop:home' %}">Home</a></li>
-                <li class="{% if request.path == shop_page %}active{% endif %}"><a
-                        href="{% url 'example__simple_shop:shop' %}" class="left-nav">Shop</a></li>
-                <li class="{% if request.path == cart_page %}active{% endif %}"><a
-                        href="{% url 'example__simple_shop:cart' %}" class="left-nav">Cart</a></li>
-                <li class="{% if request.path == checkout_page %}active{% endif %}"><a
-                        href="{% url 'example__simple_shop:checkout' %}" class="left-nav">Checkout</a></li>
+                        href="{% url 'example__simple_shop:shop' %}">Shop</a></li>
             </ul>
         </nav>
         <!-- Button Group -->
         {% if request.user.is_authenticated %}
-            <h6 class="text-primary-darker">Hello, {% if request.user.is_authenticated %}
-                <strong>{{ user.username }}</strong>
+        <h6 class="text-primary-darker mt-5">Hello, {% if request.user.is_authenticated %}
+            <strong>{{ user.username }}</strong>
             {% endif %}</h6>
-            <div class="amado-btn-group mt-30 mb-100">
-                <a href="#" class="btn button-warning text-light mb-15 p-3">Discount</a>
-            </div>
+        <nav class="amado-nav left-nav">
+            <ul>
+                <li><a href="{% url 'example__simple_shop:logout' %}">Logout</a></li>
+            </ul>
+        </nav>
+        <div class="amado-btn-group mt-30 mb-100">
+            <a href="#" class="btn button-warning text-light mb-15 p-3">Discount</a>
+        </div>
 
-            <!-- Cart Menu -->
-            <div class="cart-fav-search mb-100 text-secondary-color">
-                <a href="cart.html" class="cart-nav"><img
-                        src="{% static 'example__simple_shop/img/core-img/cart.png' %}" alt=""> Cart
-                    <span>(0)</span></a>
-                <a href="#" class="fav-nav"><img src="{% static 'example__simple_shop/img/core-img/favorites.png' %}"
-                                                 alt=""> Favourite</a>
-                <a href="#" class="search-nav"><img src="{% static 'example__simple_shop/img/core-img/search.png' %}"
-                                                    alt=""> Search</a>
-            </div>
+        <!-- Cart Menu -->
+        <div class="cart-fav-search mb-100 text-secondary-color">
+            <a href="cart.html" class="cart-nav"><img
+                    src="{% static 'example__simple_shop/img/core-img/cart.png' %}" alt=""> Cart
+                <span>(0)</span></a>
+            <a href="#" class="fav-nav"><img src="{% static 'example__simple_shop/img/core-img/favorites.png' %}"
+                                             alt=""> Favourite</a>
+            <a href="#" class="search-nav"><img src="{% static 'example__simple_shop/img/core-img/search.png' %}"
+                                                alt=""> Search</a>
+        </div>
         {% else %}
-            <nav class="amado-nav left-nav mt-5 mb-5">
-                <ul>
-                    <li class="{% if request.path == login_page %}active{% endif %}">
-                        <a href="{% url 'example__simple_shop:login' %}"
-                           class="left-nav text-warning">Login</a>
-                    </li>
-                    <li class="{% if request.path == register_page %}active{% endif %}">
-                        <a href="{% url 'example__simple_shop:register' %}"
-                           class="left-nav">Register</a>
-                    </li>
-                </ul>
-            </nav>
+        <nav class="amado-nav left-nav mt-5 mb-5">
+            <ul>
+                <li class="{% if request.path == login_page %}active{% endif %}">
+                    <a href="{% url 'example__simple_shop:login' %}"
+                       class="left-nav text-warning">Login</a>
+                </li>
+                <li class="{% if request.path == register_page %}active{% endif %}">
+                    <a href="{% url 'example__simple_shop:register' %}"
+                       class="left-nav">Register</a>
+                </li>
+            </ul>
+        </nav>
         {% endif %}
         <!-- Social Button -->
         <div class="row justify-content-center">
             <a href="https://ychernyshev.vercel.app/" class="text-primary-dark mx-auto" target="_blank">ychernyshev.vercel.com</a>
         </div>
         <div class="social-info d-flex justify-content-between mt-3">
-            <a href="https://www.linkedin.com/in/ychernyshev/" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-            <a href="https://www.youtube.com/@165000klmn/videos" target="_blank"><i class="fa fa-youtube" aria-hidden="true"></i></a>
-            <a href="https://github.com/ychernyshev?tab=repositories" target="_blank"><i class="fa fa-git" aria-hidden="true"></i></a>
+            <a href="https://www.linkedin.com/in/ychernyshev/" target="_blank"><i class="fa fa-linkedin"
+                                                                                  aria-hidden="true"></i></a>
+            <a href="https://www.youtube.com/@165000klmn/videos" target="_blank"><i class="fa fa-youtube"
+                                                                                    aria-hidden="true"></i></a>
+            <a href="https://github.com/ychernyshev?tab=repositories" target="_blank"><i class="fa fa-git"
+                                                                                         aria-hidden="true"></i></a>
         </div>
     </header>
     <!-- Header Area End -->

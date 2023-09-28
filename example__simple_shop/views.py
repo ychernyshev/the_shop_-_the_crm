@@ -1,15 +1,53 @@
+from django.contrib import messages
+from django.contrib.auth import logout, login
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
 
 from example__simple_admin.models import ProductModel
+from example__simple_shop.forms import UserRegisterForm, UserLoginForm
 
 
 # Create your views here.
 def user_register(request):
-    return render(request, 'example__simple_shop/user_register.html')
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Thank you for registering')
+            return HttpResponseRedirect('example__simple_shop:login')
+    else:
+        form = UserRegisterForm()
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'example__simple_shop/account/register.html',
+                  context=context)
 
 
 def user_login(request):
-    return render(request, 'example__simple_shop/user_login.html')
+    if request.method == 'POST':
+        form = UserLoginForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            messages.success(request, 'Login successful')
+            return HttpResponseRedirect(reverse('example__simple_shop:shop'))
+    else:
+        form = UserLoginForm()
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'example__simple_shop/account/login.html', context=context)
+
+
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('example__simple_shop:shop'))
 
 
 def index(request):
@@ -24,7 +62,11 @@ def index(request):
 
 
 def shop(request):
-    return render(request, 'example__simple_shop/shop.html')
+    context = {
+        'title': 'shop'
+    }
+
+    return render(request, 'example__simple_shop/shop.html', context=context)
 
 
 def product(request):
@@ -32,11 +74,19 @@ def product(request):
 
 
 def cart(request):
-    return render(request, 'example__simple_shop/cart.html')
+    context = {
+        'title': 'cart'
+    }
+
+    return render(request, 'example__simple_shop/cart.html', context=context)
 
 
 def checkout(request):
-    return render(request, 'example__simple_shop/checkout.html')
+    context = {
+        'title': 'checkout'
+    }
+
+    return render(request, 'example__simple_shop/checkout.html', context=context)
 
 
 def user_page(request):
