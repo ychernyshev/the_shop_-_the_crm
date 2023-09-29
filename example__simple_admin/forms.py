@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import ProductModel
+from .models import ProductModel, ProductCategoryModel
 
 
 class AddProductForm(forms.Form):
@@ -10,6 +10,11 @@ class AddProductForm(forms.Form):
                                     'class': 'form-control',
                                     'placeholder': 'Product title'
                                 }))
+    category = forms.ModelChoiceField(label='', empty_label='Category',
+                                      queryset=ProductCategoryModel.objects.all(),
+                                      widget=forms.Select(attrs={
+                                          'class': '',
+                                      }))
     description = forms.CharField(label='', widget=forms.Textarea(
         attrs={
             'class': 'form-control',

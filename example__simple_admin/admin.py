@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from example__simple_admin.models import ProductModel, AdditionalImageModel
+from example__simple_admin.models import ProductModel, AdditionalImageModel, \
+    ProductCategoryModel, DiscountModel, OrderModel, OrderLine
 
 
 # Register your models here.
@@ -17,3 +18,9 @@ class ProductAdmin(admin.ModelAdmin):
     inlines = [
         AdditionalImageInline
     ]
+
+
+admin.site.register(ProductCategoryModel)
+admin.site.register(DiscountModel)
+admin.site.register(OrderLine)
+admin.site.register(OrderModel)
