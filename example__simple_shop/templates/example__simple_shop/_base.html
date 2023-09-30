@@ -10,7 +10,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Simple Shop: {% block title %}{{ title }}{% endblock %}</title>
+    <title>Simple Shop: {{ title }}{% block title %}{% endblock %}</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="{% static 'example__simple_shop/img/core-img/favicon.ico' %}">
@@ -64,7 +64,7 @@
         </div>
         <!-- Logo -->
         <div class="logo">
-            <a href="index.html"><img src="{% static 'example__simple_shop/img/core-img/logo.png' %}" alt=""></a>
+            <a href="{% url 'example__simple_shop:shop' %}"><img src="{% static 'example__simple_shop/img/core-img/logo.png' %}" alt=""></a>
         </div>
         <!-- Amado Nav -->
         <nav class="amado-nav left-nav">
@@ -81,9 +81,15 @@
 
         <!-- Cart Menu -->
         <div class="cart-fav-search mb-100 text-secondary-color">
-            <a href="cart.html" class="cart-nav"><img
-                    src="{% static 'example__simple_shop/img/core-img/cart.png' %}" alt=""> Cart
-                <span>(0)</span></a>
+            {% if count_in_cart %}
+                <a href="{% url 'example__simple_shop:cart' %}" class="cart-nav"><img
+                        src="{% static 'example__simple_shop/img/core-img/cart.png' %}" alt=""> Cart
+                    <span>({{ count_in_cart }})</span></a>
+            {% else %}
+                <a href="{% url 'example__simple_shop:cart' %}" class="cart-nav disabled"><img
+                        src="{% static 'example__simple_shop/img/core-img/cart.png' %}" alt=""> Cart
+                    <span>({{ count_in_cart }})</span></a>
+            {% endif %}
             <a href="#" class="fav-nav"><img src="{% static 'example__simple_shop/img/core-img/favorites.png' %}"
                                              alt=""> Favourite</a>
             <a href="#" class="search-nav"><img src="{% static 'example__simple_shop/img/core-img/search.png' %}"

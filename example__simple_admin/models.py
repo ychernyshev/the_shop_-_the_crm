@@ -14,8 +14,15 @@ class ProductModel(models.Model):
     description = models.TextField()
     price = models.FloatField()
     in_stock = models.BooleanField(default=False, blank=True, null=True)
-    count = models.IntegerField()
     main_image = models.ImageField(upload_to='products/')
+
+    count = 1
+
+    def get_count(self):
+        return self.count
+
+    def get_sum_price(self):
+        return self.count * self.price
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
