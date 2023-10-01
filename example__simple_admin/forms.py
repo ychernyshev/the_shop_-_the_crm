@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import ProductModel, ProductCategoryModel
+from .models import ProductModel
 
 
 class AddProductForm(forms.Form):
@@ -10,11 +10,6 @@ class AddProductForm(forms.Form):
                                     'class': 'form-control',
                                     'placeholder': 'Product title'
                                 }))
-    category = forms.ModelChoiceField(label='', empty_label='Category',
-                                      queryset=ProductCategoryModel.objects.all(),
-                                      widget=forms.Select(attrs={
-                                          'class': '',
-                                      }))
     description = forms.CharField(label='', widget=forms.Textarea(
         attrs={
             'class': 'form-control',
@@ -35,12 +30,14 @@ class AddProductForm(forms.Form):
                                           'placeholder': 'Price'
                                       }))
     count = forms.IntegerField(label='',
+                               required=False,
                                widget=forms.NumberInput(
                                    attrs={
                                        'class': 'form-control',
-                                       'placeholder': 'Count in stock'
+                                       'placeholder': 'Count in stock',
+                                       'min': 0,
                                    }))
-    main_image = forms.ImageField(label='', widget=forms.FileInput(attrs={'class': 'form-control-file'}))
+    main_image = forms.CharField(label='', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Main image address'}))
 
 
 class AddProductModelForm(forms.ModelForm):
@@ -50,6 +47,12 @@ class AddProductModelForm(forms.ModelForm):
                                     'class': 'form-control',
                                     'placeholder': 'Product title'
                                 }))
+    slug = forms.CharField(label='',
+                           widget=forms.TextInput(
+                               attrs={
+                                   'class': 'form-control',
+                                   'placeholder': 'Product title'
+                               }))
     description = forms.CharField(label='', widget=forms.Textarea(
         attrs={
             'class': 'form-control',
@@ -73,9 +76,12 @@ class AddProductModelForm(forms.ModelForm):
                                widget=forms.NumberInput(
                                    attrs={
                                        'class': 'form-control',
-                                       'placeholder': 'Count in stock'
+                                       'placeholder': 'Count in stock',
+                                       'min': 0,
                                    }))
-    main_image = forms.ImageField(label='', widget=forms.FileInput(attrs={'class': 'form-control-file border-1'}))
+    main_image = forms.CharField(label='', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Main image address'}))
+
+    # main_image = forms.ImageField(label='', widget=forms.FileInput(attrs={'class': 'form-control-file'}))
 
     class Meta:
         model = ProductModel

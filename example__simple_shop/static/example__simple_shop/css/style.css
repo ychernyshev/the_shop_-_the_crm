@@ -46,3 +46,29 @@ a.left-nav:active {
     color: #607084;
 }
 /*End of Text*/
+
+/*Font Size*/
+.font-1 {
+    font-size: 1rem;
+}
+
+.font-2 {
+    font-size: 1.3rem;
+}
+
+.font-3 {
+    font-size: 1.6rem;
+}
+
+.font-4 {
+    font-size: 1.9rem;
+}
+
+.font-5 {
+    font-size: 2.1rem;
+}
+
+.font-6 {
+    font-size: 2.4rem;
+}
+/*End of the Font Size*/

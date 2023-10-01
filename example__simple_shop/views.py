@@ -101,7 +101,7 @@ def cart(request):
             # product = get_object_or_404(ProductModel, pk=product_id)
             try:
                 product = ProductModel.objects.get(pk=product_id)
-                # product.count_in_cart = cart_info(product_id)  # Додаємо кількість товару у кошик
+                product.count = cart_info[product_id]  # Додаємо кількість товару у кошик
                 products.append(product)
             except ProductModel.DoesNotExist:
                 raise Http404()
@@ -179,11 +179,8 @@ def update_cart_info(request):
         cart_info = request.session.get('cart_info')
         product_id = request.GET.get('add_one')
         get_object_or_404(ProductModel, pk=product_id)
-        current_count = cart_info.get(product_id, 0)
-        if current_count <= 1:
-            cart_info.pop(product_id)
-        else:
-            cart_info[product_id] += 1
+        cart_info[product_id] += 1
+        print(cart_info)
         request.session['cart_info'] = cart_info
         return HttpResponseRedirect(reverse('example__simple_shop:cart'))
 

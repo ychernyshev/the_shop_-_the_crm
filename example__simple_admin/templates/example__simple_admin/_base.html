@@ -73,6 +73,7 @@
             <a href="{% url 'example__simple_admin:dashboard' %}"><img src="{% static 'example__simple_shop/img/core-img/logo_admin.png' %}" alt=""></a>
         </div>
         <!-- Amado Nav -->
+        {% include 'example__simple_admin/inc/_messages.html' %}
         <nav class="amado-nav left-nav">
             <ul>
                 <li><strong>Products</strong></li>
@@ -112,13 +113,6 @@
         </div>
     </header>
     <!-- Header Area End -->
-    {% if messages %}
-        {% for message in messages %}
-            <div {% if message.tags %} class="alert  alert-{{ message.tags }}" {% endif %} role="alert">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endif %}
     {% block content %}{% endblock %}
 </div>
 

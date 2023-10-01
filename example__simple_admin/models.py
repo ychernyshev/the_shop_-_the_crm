@@ -1,5 +1,17 @@
+import string
+
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
+from django.template.defaultfilters import slugify
+from django.utils.crypto import get_random_string
+
+
+def unique_slugify(instance, slug):
+    model = instance.__class__
+    unique_slug = slug
+    while model.objects.filter(slug=unique_slug).exists():
+        unique_slug = slug + get_random_string(length=4)
+    return unique_slug
 
 
 # Create your models here.
@@ -10,11 +22,11 @@ class ProductModel(models.Model):
     title = models.CharField(max_length=50)
     slug = models.CharField(max_length=50)
     category = models.ForeignKey('ProductCategoryModel', related_name='product_category',
-                                 db_index=True, on_delete=models.CASCADE)
+                                 db_index=True, on_delete=models.CASCADE, blank=True, null=True)
     description = models.TextField()
     price = models.FloatField()
     in_stock = models.BooleanField(default=False, blank=True, null=True)
-    main_image = models.ImageField(upload_to='products/')
+    main_image = models.CharField(max_length=100)
 
     count = 1
 
@@ -24,9 +36,14 @@ class ProductModel(models.Model):
     def get_sum_price(self):
         return self.count * self.price
 
+    # def save(self, *args, **kwargs):
+    #     self.slug = slugify(self.title)
+    #     super(ProductModel, self).save(*args, **kwargs)
+
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
-        super(ProductModel, self).save(*args, **kwargs)
+        if not self.slug:
+            self.slug = unique_slugify(self, slugify(self.title))
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f'{self.title}: {self.price}$, in stock: {self.in_stock}, count: {self.count}'

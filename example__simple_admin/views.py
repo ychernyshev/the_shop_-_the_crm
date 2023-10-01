@@ -47,8 +47,7 @@ def product_add(request):
                 ProductModel.objects.create(**form.cleaned_data)
                 if form:
                     messages.success(request, f'Product "{title}" created successfully')
-                    return HttpResponseRedirect(reverse(
-                        'example__simple_admin:product_list'))
+                    return HttpResponseRedirect(reverse('example__simple_admin:product_list'))
                 else:
                     messages.warning(request, 'Something went wrong. Please try again')
     else:
@@ -59,8 +58,7 @@ def product_add(request):
         'form': form,
     }
 
-    return render(request, 'example__simple_admin/products/product_add.html',
-                  context=context)
+    return render(request, 'example__simple_admin/products/product_add.html', context=context)
 
 
 def product_details(request, slug=None):
@@ -71,8 +69,7 @@ def product_details(request, slug=None):
         'product_details': product_details,
     }
 
-    return render(request, 'example__simple_admin/products/product_details.html',
-                  context=context)
+    return render(request, 'example__simple_admin/products/product_details.html', context=context)
 
 
 class ProductUpdateView(SuccessMessageMixin, UpdateView):

@@ -1,6 +1,6 @@
 {% extends 'example__simple_shop/_base.html' %}
 
-{% block title %}{{ product_details.title }}{% endblock %}
+{% block title %}{{ product_details.title }} - ${{ product_details.price }}{% endblock %}
 
 {% block content %}
     <div class="single-product-area section-padding-100 clearfix">
@@ -23,46 +23,7 @@
                 <div class="col-12 col-lg-7">
                     <div class="single_product_thumb">
                         <div id="product_details_slider" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                                <li class="" data-target="#product_details_slider" data-slide-to="0"
-                                    style="background-image: url(img/product-img/pro-big-1.jpg);">
-                                </li>
-                                <li data-target="#product_details_slider" data-slide-to="1"
-                                    style="background-image: url(img/product-img/pro-big-2.jpg);" class="">
-                                </li>
-                                <li data-target="#product_details_slider" data-slide-to="2"
-                                    style="background-image: url(img/product-img/pro-big-3.jpg);" class="active">
-                                </li>
-                                <li data-target="#product_details_slider" data-slide-to="3"
-                                    style="background-image: url(img/product-img/pro-big-4.jpg);">
-                                </li>
-                            </ol>
-                            <div class="carousel-inner">
-                                <div class="carousel-item">
-                                    <a class="gallery_img" href="img/product-img/pro-big-1.jpg">
-                                        <img class="d-block w-100" src="img/product-img/pro-big-1.jpg"
-                                             alt="First slide">
-                                    </a>
-                                </div>
-                                <div class="carousel-item">
-                                    <a class="gallery_img" href="img/product-img/pro-big-2.jpg">
-                                        <img class="d-block w-100" src="img/product-img/pro-big-2.jpg"
-                                             alt="Second slide">
-                                    </a>
-                                </div>
-                                <div class="carousel-item active">
-                                    <a class="gallery_img" href="img/product-img/pro-big-3.jpg">
-                                        <img class="d-block w-100" src="img/product-img/pro-big-3.jpg"
-                                             alt="Third slide">
-                                    </a>
-                                </div>
-                                <div class="carousel-item">
-                                    <a class="gallery_img" href="img/product-img/pro-big-4.jpg">
-                                        <img class="d-block w-100" src="img/product-img/pro-big-4.jpg"
-                                             alt="Fourth slide">
-                                    </a>
-                                </div>
-                            </div>
+                            <img src="{{ product_details.main_image }}" alt="{{ product_details.title }}">
                         </div>
                     </div>
                 </div>
@@ -70,8 +31,17 @@
                     <div class="single_product_desc">
                         <!-- Product Meta Data -->
                         <div class="product-meta-data">
-                            <div class="line"></div>
-                            <p class="product-price">${{ product_details.price }}</p>
+                            <div class="d-flex justify-content-between">
+                                <div>
+{#                                    <div class="line"></div>#}
+                                    <p class="product-price d-flex align-items-center justify-content-center" style="height: 3rem">${{ product_details.price }}</p>
+                                </div>
+                                <!-- Add to Cart Form -->
+                                <form class="cart clearfix" method="post">
+                                    <a href="{{ request.path }}?add_cart={{ product_details.id }}"
+                                       class="btn amado-btn d-flex align-items-center justify-content-center" style="width: 3rem; height: 3rem">Add to cart</a>
+                                </form>
+                            </div>
                             <a href="product-details.html">
                                 <h6>{{ product_details.title }}</h6>
                             </a>
@@ -90,20 +60,15 @@
                             </div>
                             <!-- Avaiable -->
                             {% if product_details.in_stock %}
-                            <p class="avaibility"><i class="fa fa-circle"></i> In Stock</p>
+                                <p class="avaibility"><i class="fa fa-circle"></i> In Stock</p>
                             {% else %}
-                            <p class="is_not_avaibility"><i class="fa fa-circle"></i> Not in Stock</p>
+                                <p class="is_not_avaibility"><i class="fa fa-circle"></i> Not in Stock</p>
                             {% endif %}
                         </div>
 
                         <div class="short_overview my-5">
                             <p>{{ product_details.description }}</p>
                         </div>
-
-                        <!-- Add to Cart Form -->
-                        <form class="cart clearfix" method="post">
-                            <a href="{{ request.path }}?add_cart={{ product_details.id }}" class="btn amado-btn">Add to cart</a>
-                        </form>
                     </div>
                 </div>
             </div>
