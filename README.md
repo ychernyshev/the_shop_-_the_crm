@@ -44,6 +44,9 @@ python3 manage.py runserver
 ### Page address
 [http://localhost:8000](http://localhost:8000)
 
+## 📜 License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
 ### Preview images
 #### Shop
 ![the_shop-the_crm-home.png](example__simple_shop/static/example__simple_shop/img/the_shop-the_crm-home.png)
