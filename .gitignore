@@ -1,0 +1,14 @@
+# PyCharm / IntelliJ IDE settings
+.idea/
+
+# Python virtual environments
+.venv/
+venv/
+ENV/
+
+# Compiled Python files (never ignore actual .py source files!)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
